@@ -1,27 +1,11 @@
-<!DOCTYPE html>
-
+{% extends 'rango/base.html' %}
 {% load staticfiles %}
 
-<html>
-<head>
-    <title>Rango</title>
-    <!-- CSS -->
-    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" />
-    <!-- JavaScript -->
-    <script src="{% static "js/bootstrap.js" %}"></script>
-</head>
-
-</head>
-
-    <body>
+{% block body_block %}
     <h1>This tutorial has been put together
 by <strong>{{ boldmessage }}</strong> </h1>
-    </div>
     <div>
-        <a href="/rango/">Home</a><br />
-        <img src="{% static "images/cosmos.jpg" %}" alt="Picture of Cosmos" />
+        <img src="{% static "images/cosmos.jpg" %}" alt="Picture of Cosmos" /></br>
+         <a href="{% url 'index' %}">Home</a>
     </div>
-
-    </body>
-
-</html>
+{% endblock %}
