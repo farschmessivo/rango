@@ -19,6 +19,14 @@ from django.conf.urls import include
 from django.conf import settings
 from django.conf.urls.static import static
 from rango import views
+from registration.backends.simple.views import RegistrationView
+
+
+# Create a new class that redirects the user to the index page,
+# if successful at logging
+class MyRegistrationView(RegistrationView):
+    def get_success_url(self, user):
+        return '/rango/'
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
@@ -27,4 +35,14 @@ urlpatterns = [
     # with rango/ to be handled by
     # the rango application
     url(r'^admin/', admin.site.urls),
+    url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^accounts/register/$', MyRegistrationView.as_view(),
+        name='registration_register'),
+    # new url definitions
+#    url(r'^accounts/password/change/$', password_change, {
+#        'template_name': 'registration/password_change.html'},
+#        name='password_change'),
+#    url(r'^accounts/password/change/done/$', password_change_done, {
+#        'template_name': 'registration/password_change_done.html'},
+#        name='password_change_done'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
